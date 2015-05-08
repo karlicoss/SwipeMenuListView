@@ -4,7 +4,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.0.0'
-        classpath 'com.github.dcendents:android-maven-plugin:1.2'
     }
 }
 
@@ -13,10 +12,9 @@ repositories {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: 'android-maven'
 
 dependencies {
-	compile files('libs/android-support-v4.jar')
+    provided 'com.android.support:support-v4:18+'
 }
 
 android {
@@ -25,24 +23,24 @@ android {
 
     defaultConfig {
         minSdkVersion 8
-        targetSdkVersion 21
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
-	sourceSets {
-	    main {
-	        manifest.srcFile 'AndroidManifest.xml'
-                java.srcDirs = ['src']
-                resources.srcDirs = ['src']
-                aidl.srcDirs = ['src']
-                renderscript.srcDirs = ['src']
-		res.srcDirs = ['res']
-	    }
-	}
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
         }
     }
 }
