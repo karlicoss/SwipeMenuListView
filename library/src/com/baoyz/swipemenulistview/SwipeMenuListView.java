@@ -107,8 +107,7 @@ public class SwipeMenuListView extends ListView {
 	public boolean onTouchEvent(MotionEvent ev) {
 		if (ev.getAction() != MotionEvent.ACTION_DOWN && mTouchView == null)
 			return super.onTouchEvent(ev);
-		int action = MotionEventCompat.getActionMasked(ev);
-		action = ev.getAction();
+		int action = ev.getAction();
 		switch (action) {
 		case MotionEvent.ACTION_DOWN:
 			int oldPos = mTouchPosition;
@@ -130,12 +129,6 @@ public class SwipeMenuListView extends ListView {
 			if (mTouchView != null && mTouchView.isOpen()) {
 				mTouchView.smoothCloseMenu();
 				mTouchView = null;
-				// return super.onTouchEvent(ev);
-				// try to cancel the touch event
-				MotionEvent cancelEvent = MotionEvent.obtain(ev);  
-				cancelEvent.setAction(MotionEvent.ACTION_CANCEL);    
-				onTouchEvent(cancelEvent);
-				return true;
 			}
 			if (view instanceof SwipeMenuLayout) {
 				mTouchView = (SwipeMenuLayout) view;
